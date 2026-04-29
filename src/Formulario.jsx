@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { LISTA_CATEGORIAS } from './constantes.js'
 
 function Formulario({ agregarMovimiento, movimientoAEditar, cancelarEdicion }) {
+    const fechaHoy = new Date().toISOString().split('T')[0];
     const [movimiento, setMovimiento] = useState({
         descripcion: "",
         monto: "",
         tipo: "gasto",
         categoria: "Comida", 
-        fecha: "",
+        fecha: fechaHoy,
     });
 
     useEffect(() => {
@@ -29,7 +30,7 @@ function Formulario({ agregarMovimiento, movimientoAEditar, cancelarEdicion }) {
             monto: "", 
             tipo: "gasto", 
             categoria: "Comida", 
-            fecha: "", 
+            fecha: fechaHoy, 
             id: null,
         });
         cancelarEdicion();
@@ -67,7 +68,7 @@ function Formulario({ agregarMovimiento, movimientoAEditar, cancelarEdicion }) {
             monto: "",
             tipo: "gasto",
             categoria: "Comida",
-            fecha: "",
+            fecha: fechaHoy,
             id: null,
         });
     }

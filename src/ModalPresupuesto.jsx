@@ -18,7 +18,7 @@ function ModalPresupuesto({limiteActual, registrarLimite, cerrarModal}) {
     }
     return (
         <div className="backdrop" onClick={cerrarModal}>
-            <div className="contenido-modal">
+            <div className="contenido-modal" onClick={(e) => e.stopPropagation()}>
                 <h3>Limite de Gasto</h3>
                 <form onSubmit={manejarEnvio}>
                     <input type="number"

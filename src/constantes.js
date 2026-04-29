@@ -3,5 +3,6 @@ export const LISTA_CATEGORIAS = [
   { id: 'tra', nombre: 'Transporte', icono: '🚌' },
   { id: 'oci', nombre: 'Ocio', icono: '🎮' },
   { id: 'sal', nombre: 'Salud', icono: '🏥' },
-  { id: 'edu', nombre: 'Educación', icono: '📚' }
+  { id: 'edu', nombre: 'Educación', icono: '📚' },
+  { id: 'sue', nombre: 'Sueldo', icono: '💰' },
 ];

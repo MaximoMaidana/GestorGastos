@@ -260,14 +260,15 @@ button:hover {
 }
 
 .icono {
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
+  font-size: 1.8rem;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--color-fondo);
   border-radius: 50%;
+  line-height: 1;
 }
 
 .descripcion {
