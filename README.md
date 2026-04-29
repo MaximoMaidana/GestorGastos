@@ -1,16 +1,28 @@
-# React + Vite
+content = """# Gestor de Gastos - React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación sencilla para la gestión de finanzas personales, desarrollada como parte de la asignatura **Desarrollo de Software**.
 
-Currently, two official plugins are available:
+## Descripción
+Esta aplicación permite llevar un control detallado de ingresos y gastos diarios. Utiliza el almacenamiento local del navegador (`localStorage`) para que la información persista incluso al cerrar la página.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Características Principales
+- **Registro de Movimientos:** Añade ingresos y gastos especificando descripción, monto, fecha y categoría.
+- **Control de Presupuesto:** Define un límite de gasto mensual. La aplicación mostrará una alerta visual si los gastos superan el límite establecido.
+- **Filtros y Ordenación:** Filtra tus movimientos por categoría y ordénalos por fecha o monto (ascendente/descendente).
+- **Persistencia de Datos:** Todos los datos se guardan automáticamente en el navegador.
+- **Edición y Borrado:** Permite modificar o eliminar cualquier registro previo.
 
-## React Compiler
+## Tecnologías Utilizadas
+- **React**: Biblioteca principal para la interfaz de usuario.
+- **Vite**: Herramienta de construcción y desarrollo.
+- **CSS3**: Estilos personalizados con diseño responsivo para móviles.
+- **JavaScript (ES6+)**: Lógica de la aplicación y manejo del estado.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Instalación y Uso
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clonar el repositorio.
+2. Instalar las dependencias:
+   ```bash
+   npm install
+3. Ejecutar el proyecto en modo desarrollo:
+    npm run dev
