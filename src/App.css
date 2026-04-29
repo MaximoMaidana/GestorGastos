@@ -1,0 +1,398 @@
+:root {
+  --color-principal: #2563EB;
+  --color-principal-hover: #1D4ED8;
+  --color-fondo: #F3F4F6;
+  --color-superficie: #FFFFFF;
+  --texto-principal: #1F2937;
+  --texto-secundario: #6B7280;
+  --color-peligro: #EF4444; 
+  --color-exito: #10B981; 
+  --radio-borde: 12px;
+  --transicion: all 0.3s ease;
+}
+
+/* -----------------------------------------
+   1. GLOBALES
+   ----------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--texto-principal);
+  line-height: 1.5;
+}
+
+/* -----------------------------------------
+   2. ESTRUCTURA PRINCIPAL
+   ----------------------------------------- */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+header {
+  background-color: var(--color-principal);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  /* Sombra sutil para despegar el header del fondo */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+section {
+  background: var(--color-superficie);
+  padding: 1.5rem;
+  border-radius: var(--radio-borde);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* -----------------------------------------
+   3. SECCIÓN BALANCE Y ALERTA
+   ----------------------------------------- */
+/* Usamos flexbox para que las tres tarjetas de balance (Total, Entradas, Salidas) se ubiquen una al lado de la otra */
+section:first-of-type > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+section:first-of-type > div > div {
+  flex: 1; /* Esto obliga a que las tres tarjetas tengan exactamente el mismo ancho */
+  background: var(--color-fondo);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+section:first-of-type h3 {
+  font-size: 0.9rem;
+  color: var(--texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+section:first-of-type p {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* ANIMACIÓN DE EXCESO DE PRESUPUESTO */
+@keyframes pulso-peligro {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    border: 2px solid transparent;
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+    border: 2px solid var(--color-peligro);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    border: 2px solid transparent;
+  }
+}
+
+/* Esta clase se aplica condicionalmente cuando los gastos superan el límite */
+.limite-excedido {
+  background-color: #FEF2F2 !important; 
+  color: var(--color-peligro);
+  animation: pulso-peligro 2s infinite; /* Ejecuta la animación creada arriba de forma infinita */
+  border-radius: 8px;
+}
+
+.limite-excedido h3 {
+  color: var(--color-peligro) !important;
+}
+
+/* -----------------------------------------
+   4. FORMULARIO
+   ----------------------------------------- */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divide el formulario en dos columnas iguales */
+  gap: 1.5rem;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--texto-principal);
+}
+
+input, select {
+  background-color: #FFFFFF; 
+  color: var(--texto-principal);
+  padding: 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transicion);
+}
+
+/* Efecto al hacer clic en un input */
+input:focus, select:focus {
+  border-color: var(--color-principal);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); 
+}
+
+/* Ocultar las flechitas de los inputs numéricos.*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  appearance: textfield;
+}
+
+/* Esto le dice a elementos específicos que ocupen desde la primera línea del grid hasta la última, abarcando las dos columnas enteras */
+.acciones-formulario,
+form > button[type="submit"] {
+  grid-column: 1 / -1;
+}
+
+button {
+  background-color: var(--color-principal);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion);
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: var(--color-principal-hover);
+}
+
+.toggle-btn {
+  background-color: var(--color-peligro);
+  transition: background-color 0.3s;
+}
+
+.toggle-btn.ingreso {
+  background-color: var(--color-exito);
+}
+
+/* -----------------------------------------
+   5. FILTROS Y LISTA
+   ----------------------------------------- */
+.contenedor-filtros {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  background: var(--color-fondo);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.grupo-filtro {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-toggle-orden, .btn-direccion {
+  background-color: white;
+  color: var(--texto-principal);
+  border: 1px solid #D1D5DB;
+}
+
+.btn-toggle-orden:hover, .btn-direccion:hover {
+  background-color: #F9FAFB;
+  border-color: var(--texto-secundario);
+}
+
+/* -----------------------------------------
+   6. ÍTEMS DE MOVIMIENTO
+   ----------------------------------------- */
+.lista-container h3 {
+  margin-bottom: 1.5rem;
+  color: var(--texto-principal);
+}
+
+.item-container {
+  display: grid;
+  /* Creamos 5 columnas: 
+     1. auto (icono)
+     2. 1fr (toma todo el espacio sobrante para la descripción)
+     3, 4 y 5. auto (se ajustan al contenido para monto, fecha y botones) */
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #E5E7EB;
+  transition: var(--transicion);
+}
+
+.item-container:hover {
+  background-color: #F9FAFB;
+}
+
+.item-container:last-child {
+  border-bottom: none;
+}
+
+.icono {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-fondo);
+  border-radius: 50%;
+}
+
+.descripcion {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.monto {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.gasto .monto {
+  color: var(--color-peligro);
+}
+
+.ingreso .monto {
+  color: var(--color-exito);
+}
+
+.item-container button {
+  background: transparent;
+  color: var(--texto-secundario);
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.item-container button:hover {
+  color: var(--color-principal);
+  background: #E0E7FF;
+}
+
+/* -----------------------------------------
+   7. MODAL (PRESUPUESTO)
+   ----------------------------------------- */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px); /* Difumina el fondo de la app detrás del modal */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Asegura que el modal quede por encima de todo lo demás */
+}
+
+.contenido-modal {
+  background: var(--color-superficie);
+  padding: 2rem;
+  border-radius: var(--radio-borde);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Anula la regla de las 2 columnas del formulario principal exclusivamente para el modal */
+.contenido-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contenido-modal h3 {
+  margin-bottom: 1.5rem;
+}
+
+.acciones-modal {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap; /* Si la pantalla es muy chica, permite que los botones bajen a una segunda línea en vez de salirse de la caja */
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.acciones-modal button[type="button"] {
+  background: transparent;
+  color: var(--texto-principal);
+  border: 1px solid #D1D5DB;
+}
+
+/* -----------------------------------------
+   8. DISEÑO RESPONSIVO (MÓVILES)
+   ----------------------------------------- */
+
+@media (max-width: 600px) {
+  section:first-of-type > div {
+    flex-direction: column;
+  }
+  
+  form {
+    grid-template-columns: 1fr; /* Pasa el formulario a una sola columna */
+  }
+  
+  .contenedor-filtros {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  /* Redefine el Grid de la lista*/
+  .item-container {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+  }
+  
+  /* Posiciona los elementos manualmente en la nueva grilla de celular */
+  .item-container .descripcion { grid-column: 2; grid-row: 1; }
+  .item-container .monto { grid-column: 3; grid-row: 1; text-align: right; }
+  
+  /* Manda la fecha debajo de la descripción */
+  .item-container span:nth-child(4) { 
+    grid-column: 2; 
+    grid-row: 2; 
+    font-size: 0.8rem; 
+    color: var(--texto-secundario); 
+  }
+  
+  /* Manda los botones de edición/borrado abajo a la derecha */
+  .item-container span:last-child { 
+    grid-column: 3; 
+    grid-row: 2; 
+    display: flex; 
+    justify-content: flex-end; 
+  }
+}
